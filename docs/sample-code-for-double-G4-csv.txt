@@ -1,0 +1,34 @@
+    /*
+    //auto am = (G4CsvAnalysisManager*)G4AnalysisManager::Instance();
+    auto am = G4AnalysisManager::Instance();
+
+    //am->SetNtupleColumnSeparator(";"); does not work
+    //am->SetNtupleVectorSeparator(","); does not work
+    int globSummCsvId = am->CreateNtuple("gsumm", "Summary Data");
+    Logger::debug("DATAMGR", "globSummCsvId: " + std::to_string(globSummCsvId));
+    am->CreateNtupleDColumn(globSummCsvId, "Energy");
+    am->CreateNtupleDColumn(globSummCsvId, "Time");
+    am->FinishNtuple(globSummCsvId);
+
+    int stepCsvId = am->CreateNtuple("step", "Step Data");
+    Logger::debug("DATAMGR", "stepCsvId: " + std::to_string(stepCsvId));
+    am->CreateNtupleDColumn(stepCsvId, "EnergyStep");
+    am->CreateNtupleDColumn(stepCsvId, "EnergyStepTime");
+    am->FinishNtuple(stepCsvId);
+
+    G4String gsummFileName = "../proj/out/d1.csv"; //fReportsDir + "/d1.csv";
+    am->OpenFile(gsummFileName);
+
+    unsigned fIdx = 0;
+    am->FillNtupleDColumn(globSummCsvId, fIdx++, 1.0);
+    am->FillNtupleDColumn(globSummCsvId, fIdx++, 2.0);
+    am->AddNtupleRow(globSummCsvId);
+
+    unsigned gIdx = 0;
+    am->FillNtupleDColumn(stepCsvId, gIdx++, 1.2);
+    am->FillNtupleDColumn(stepCsvId, gIdx++, 1.3);
+    am->AddNtupleRow(stepCsvId);
+    am->Write();
+    am->CloseFile();
+    */
+

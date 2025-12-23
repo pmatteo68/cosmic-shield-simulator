@@ -1,0 +1,89 @@
+# Macro to generate the basic output
+
+/run/numberOfThreads 4
+
+# Alternatively if the geometry.json is absent, you can
+# define geometry by these commands. Note, they will NOT
+# be effective if the geometry has been defined in the json file.
+# Sequence is IMPORTANT: world first, then layers in their intended order,
+# then the detector, and the whole thing MUST be before /run/initialize
+# Note: maxStep in world and layers, when set to -1, means DEFAULT
+# (i.e. means left to the Geant4 library to set).
+#
+#/css/geom/materials/elements/addDef name Z A
+#/css/geom/materials/elements/addDef C 6 13.5
+#
+#/css/geom/materials/addDef name density unit elemname:fraction [elemname:fraction] ....
+#/css/geom/materials/addDef DopedPlastic 1.05 g/cm3 C:0.86925 H:0.08075 XWZ:0.05
+#
+#/css/geom/addWorld posX posY posZ material xSize ySize zSize layersOffset maxStep
+#/css/geom/addWorld 0.0 0.0 0.0 G4_Galactic 1.0 1.0 2.0 10.0 20.0
+#/css/geom/addLayer name material thickness countAllEntries  trackPrimSurvivors reqResidualEnrgOnExit evalRadiations maxStep
+#/css/geom/addLayer AlLayer1 G4_Al 50.0 true false false false 20.0
+#/css/geom/addLayer PolyLayer G4_POLYETHYLENE 50.0 true false false false 20.0
+#/css/geom/addLayer WLayer G4_W 50.0 true false false false 20.0
+#/css/geom/addLayer PbLayer G4_Pb 50.0 true false false false 20.0
+#/css/geom/addLayer AlLayer2 G4_Al 50.0 true false false false 20.0
+#/css/geom/addLayer Detector G4_AIR 50.0 false true true true 20.0
+
+# Alternatively if the beam.json is absent, you can
+# define the beam composition by these commands. Note, they will NOT
+# be effective if the beam composition has been defined in the json file.
+# 
+# And also custom particles can be defined upfront if any (and these definitions
+# will apply if the custom particles json file is absent.
+# Note: the name must not collide with an official Geant4 particle name, or it will be neglected
+#
+#/css/beam/defParticle name   Z     A excitationEnergy
+#/css/beam/defParticle Carbon 6 16.0 0.0
+#/css/beam/defParticle Oxygen 8 16.0 0.0
+#/css/beam/defParticle Neon 10 20.0 0.0
+#/css/beam/defParticle Magnesium 12 24.0 0.0
+#/css/beam/defParticle Silicon 14 28.0 0.0
+#/css/beam/defParticle Iron 26 56.0 0.0
+#/css/beam/defParticle Nitrogen 7 14.0 0.0
+#/css/beam/defParticle Sodium 11 23.0 0.0
+#/css/beam/defParticle Calcium 20 40.0 0.0
+#/css/beam/defParticle Nickel 28 58.0 0.0
+#/css/beam/defParticle Aluminum 13 27.0 0.0
+#/css/beam/defParticle Phosphorus 15 31.0 0.0
+#/css/beam/defParticle Sulfur 16 32.0 0.0
+#/css/beam/defParticle Argon 18 40.0 0.0
+#/css/beam/defParticle Zinc 30 64.0 0.0
+#
+#/css/beam/addParticle particle energy flux pos(x, y, z) momdir(x, y, z)
+#/css/beam/addParticle proton      10.0 10000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle proton     100.0  5000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle proton    1000.0  2000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle proton   10000.0   100.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle proton  100000.0    10.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha       10.0  1000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha      100.0   600.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha     1000.0   300.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha    10000.0    50.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha   100000.0     5.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-           1.0 15000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-          10.0  7000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-         100.0  3000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-        1000.0   500.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-       10000.0    50.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma        0.1  2000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma        1.0  1000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma       10.0   300.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma      100.0    50.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma     1000.0     5.0 0.0 0.0 -1.0 0.0 0.0 1.0
+
+/run/initialize
+
+#/run/verbose 0
+#/event/verbose 0
+#/geometry/navigator/verbose 0
+
+# (increasing this eventually enables the tracking)
+/tracking/verbose 0
+
+#/material/nist/listMaterials
+#/run/particleDump (not supported)
+#/particle/list
+#/run/beamOn 100000
+/run/beamOn 10

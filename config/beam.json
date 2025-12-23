@@ -1,0 +1,28 @@
+{
+  "_comment1": "def. momentum directions applies if momentum_direction is not specified at the particle level, or if vector is too small",
+  "_comment2": "def. position applies if position is not specified at the particle level",
+  "def_momentum_direction": [0.0, 0.0, 1.0],
+  "def_position": [0.0, 0.0, -1.0],
+  "beam": [
+    {"particle": "proton", "energy": 10.0, "flux": 10000.0},
+    {"particle": "proton", "energy": 100.0, "flux": 5000.0},
+    {"particle": "proton", "energy": 1000.0, "flux": 2000.0},
+    {"particle": "proton", "energy": 10000.0, "flux": 100.0},
+    {"particle": "proton", "energy": 100000.0, "flux": 10.0},
+    {"particle": "alpha", "energy": 10.0, "flux": 1000.0},
+    {"particle": "alpha", "energy": 100.0, "flux": 600.0},
+    {"particle": "alpha", "energy": 1000.0, "flux": 300.0},
+    {"particle": "alpha", "energy": 10000.0, "flux": 50.0},
+    {"particle": "alpha", "energy": 100000.0, "flux": 5.0},
+    {"particle": "e-", "energy": 1.0, "flux": 15000.0},
+    {"particle": "e-", "energy": 10.0, "flux": 7000.0},
+    {"particle": "e-", "energy": 100.0, "flux": 3000.0},
+    {"particle": "e-", "energy": 1000.0, "flux": 500.0},
+    {"particle": "e-", "energy": 10000.0, "flux": 50.0},
+    {"particle": "gamma", "energy": 0.1, "flux": 2000.0},
+    {"particle": "gamma", "energy": 1.0, "flux": 1000.0},
+    {"particle": "gamma", "energy": 10.0, "flux": 300.0},
+    {"particle": "gamma", "energy": 100.0, "flux": 50.0},
+    {"particle": "gamma", "energy": 1000.0, "flux": 5.0}
+  ]
+}

@@ -1,0 +1,10 @@
+
+PhysicsManager::PhysicsManager(int verbosity, const std::string& physListName)
+  : fVerbosity(verbosity), fPhysListName(physListName) {}
+
+G4VModularPhysicsList* PhysicsManager::createPhysList() {
+    Logger::info("DRIVER", "Loading physics list: " + fPhysListName);
+
+    G4VModularPhysicsList* physicsList = nullptr;
+    const std::string staticMsg = "Physics list is being loaded STATICALLY (initialization verbosity: " + std::to_string(fVerbosity) + ")";
+

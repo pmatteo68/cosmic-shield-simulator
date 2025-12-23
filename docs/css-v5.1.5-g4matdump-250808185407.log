@@ -1,0 +1,392 @@
+======= Cosmic Shield Simulator v. 5.1.5 Run Technical Sheet ============
+
+Timestamp: 250808193058
+
+Geant4 install root: /home/ec2-user/sw/geant4/v11.3.2/install
+
+Geant4 environment: ref. /home/ec2-user/sw/geant4/v11.3.2/install/bin/geant4.sh
+
+G4PARTICLEHPDATA=/home/ec2-user/sw/geant4/v11.3.2/install/share/Geant4/data/G4TENDL1.4
+
+------ Application configuration:
+{
+  "_comment1": "Lists with smart verbosity control: QGSP_BIC_AllHP,QGSP_BERT_HP, FTFP_BERT_HP,Shielding,QGSP_INCLXX_HP,QGSP_BIC_HP",
+  "physicsList": "QGSP_BIC_AllHP"
+}
+
+------ Geometry configuration:
+{
+  "_comment1": "The maxStep field in the world and in the layers is OPTIONAL, you need to omit it or to misspell it to get default behavior (i.e. varying step, driven by Physics selected)",
+  "_comment2": "The world position is 0.0, 0.0, 0.0 by default if not specified. NOTE: although this is configurable software-wise, Geant4 DOES NOT SUPPORT positions other than 0-0-0 for the world object. The application exposes this parameter as configurable just in case things change in future. And the workaround (creating an innerworld) would introduce complexity, and we won't do it, at least for the moment.",
+  "_comment3": "When not specified, evalRadiations is false",
+  "world": {
+    "position": [0.0, 0.0, 0.0],
+    "material": "G4_Galactic",
+    "xSize": 1.0,
+    "ySize": 1.0,
+    "zSize": 2.0,
+    "layersOffset": 10.0,
+    "maxStep": 20.0
+  },
+  "layers": [
+    {
+      "_comment_layers1": "Layer names MUST be all different, containing NO SPACES",
+      "name": "AlLayer1",
+      "material": "G4_Al",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "_comment_layers1": "Layer names MUST be all different, containing NO SPACES",
+      "name": "Plast1",
+      "material": "DopedPlastic",
+      "thickness": 20.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "_comment_layers1": "Layer names MUST be all different, containing NO SPACES",
+      "name": "PolyLayer",
+      "material": "G4_POLYETHYLENE",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "true",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "name": "WLayer",
+      "material": "G4_W",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "name": "PbLayer",
+      "material": "G4_Pb",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "_comment_layers1": "Layer names MUST be all different, containing NO SPACES",
+      "name": "AlLayer2",
+      "material": "G4_Al",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "name": "Detector",
+      "material": "G4_AIR",
+      "thickness": 50.0,
+      "countAllEntries": "false",
+      "trackPrimSurvivors": "true",
+      "reqResidualEnrgOnExit": "true",
+      "evalRadiations": "true",
+      "maxStep": 20.0
+    }
+  ]
+}
+
+------ Custom materials configuration:
+{
+  "_notes1": "units supported: g/cm3, kg/m3, mg/cm3, g/mm3, g/m3",
+  "elements": [
+    { "name": "C", "Z": 6, "A": 12.01 },
+    { "name": "H", "Z": 1, "A": 1.008 },
+    { "name": "XWZ", "Z": 16, "A": 999.0 }
+  ],
+  "materials": [
+    {
+      "name": "DopedPlastic",
+      "density": 1.05,
+      "unit": "g/cm3",
+      "components": [
+        { "element": "C", "fraction": 0.86925 },
+        { "element": "H", "fraction": 0.08075 },
+        { "element": "XWZ", "fraction": 0.05 }
+      ]
+    }
+  ]
+}
+
+
+------ Custom particles configuration:
+{
+  "particleDefs": [
+    { "name": "Carbon",     "Z": 6,  "A": 16.0,  "excitationEnergy": 0.0 },
+    { "name": "Oxygen",     "Z": 8,  "A": 16.0,  "excitationEnergy": 0.0 },
+    { "name": "Neon",       "Z": 10, "A": 20.0,  "excitationEnergy": 0.0 },
+    { "name": "Magnesium",  "Z": 12, "A": 24.0,  "excitationEnergy": 0.0 },
+    { "name": "Silicon",    "Z": 14, "A": 28.0,  "excitationEnergy": 0.0 },
+    { "name": "Iron",       "Z": 26, "A": 56.0,  "excitationEnergy": 0.0 },
+    { "name": "Nitrogen",   "Z": 7,  "A": 14.0,  "excitationEnergy": 0.0 },
+    { "name": "Sodium",     "Z": 11, "A": 23.0,  "excitationEnergy": 0.0 },
+    { "name": "Calcium",    "Z": 20, "A": 40.0,  "excitationEnergy": 0.0 },
+    { "name": "Nickel",     "Z": 28, "A": 58.0,  "excitationEnergy": 0.0 },
+    { "name": "Aluminum",   "Z": 13, "A": 27.0,  "excitationEnergy": 0.0 },
+    { "name": "Phosphorus", "Z": 15, "A": 31.0,  "excitationEnergy": 0.0 },
+    { "name": "Sulfur",     "Z": 16, "A": 32.0,  "excitationEnergy": 0.0 },
+    { "name": "Argon",      "Z": 18, "A": 40.0,  "excitationEnergy": 0.0 },
+    { "name": "Zinc",       "Z": 30, "A": 64.0,  "excitationEnergy": 0.0 },
+    { "name": "Uranium",    "Z": 92, "A": 238.0, "excitationEnergy": 0.0 }
+  ]
+}
+
+------ Beam configuration:
+{
+  "_comment1": "def. momentum directions applies if momentum_direction is not specified at the particle level, or if vector is too small",
+  "_comment2": "def. position applies if position is not specified at the particle level",
+  "def_momentum_direction": [0.0, 0.0, 1.0],
+  "def_position": [0.0, 0.0, -1.0],
+  "beam": [
+    {"particle": "proton", "energy": 10.0, "flux": 10000.0},
+    {"particle": "proton", "energy": 100.0, "flux": 5000.0},
+    {"particle": "proton", "energy": 1000.0, "flux": 2000.0},
+    {"particle": "proton", "energy": 10000.0, "flux": 100.0},
+    {"particle": "proton", "energy": 100000.0, "flux": 10.0},
+    {"particle": "alpha", "energy": 10.0, "flux": 1000.0},
+    {"particle": "alpha", "energy": 100.0, "flux": 600.0},
+    {"particle": "alpha", "energy": 1000.0, "flux": 300.0},
+    {"particle": "alpha", "energy": 10000.0, "flux": 50.0},
+    {"particle": "alpha", "energy": 100000.0, "flux": 5.0},
+    {"particle": "e-", "energy": 1.0, "flux": 15000.0},
+    {"particle": "e-", "energy": 10.0, "flux": 7000.0},
+    {"particle": "e-", "energy": 100.0, "flux": 3000.0},
+    {"particle": "e-", "energy": 1000.0, "flux": 500.0},
+    {"particle": "e-", "energy": 10000.0, "flux": 50.0},
+    {"particle": "gamma", "energy": 0.1, "flux": 2000.0},
+    {"particle": "gamma", "energy": 1.0, "flux": 1000.0},
+    {"particle": "gamma", "energy": 10.0, "flux": 300.0},
+    {"particle": "gamma", "energy": 100.0, "flux": 50.0},
+    {"particle": "gamma", "energy": 1000.0, "flux": 5.0}
+  ]
+}
+
+------ WR Resolution configuration:
+{
+  "_comment1": "The rules are applied in order. If one applies, the others are not evaluated. If none applies, the default applies. With debug log, rule resolution is seen. Rules are numbered from 0 to N-1",
+  "_comment2": "The thresholds are supposed as enLow <= en < enHigh (when present)",
+  "defaultWr": 5.0,
+  "wrRules": [
+    { "partName": "neutron", "enHigh": 0.001, "wr": 2.5 },
+    { "partName": "neutron", "enLow": 0.001, "enHigh": 0.01, "wr": 10 },
+    { "partName": "neutron", "enLow": 0.01, "enHigh": 0.1, "wr": 20 },
+    { "partName": "neutron", "enLow": 0.1, "enHigh": 0.5, "wr": 10 },
+    { "partName": "neutron", "enLow": 0.5, "enHigh": 1.0, "wr": 5 },
+    { "partName": "neutron", "enLow": 1.0, "enHigh": 2.0, "wr": 2.5 },
+    { "partName": "neutron", "enLow": 2.0, "enHigh": 20.0, "wr": 2.5 },
+    { "partName": "neutron", "enLow": 20.0, "wr": 1 },
+    { "partName": "proton", "wr": 2 },
+    { "partName": "alpha", "wr": 20 },
+    { "partName": "gamma", "wr": 1 },
+    { "partName": "e-", "wr": 1 },
+    { "partName": "e+", "wr": 1 },
+    { "partName": "deuteron", "wr": 2 },
+    { "partName": "triton", "wr": 2 },
+    { "partName": "He3", "wr": 20 },
+    { "partName": "GenericIon", "wr": 20 }
+  ]
+}
+
+------ Run macro:
+# Macro to generate the basic output
+
+/run/numberOfThreads 4
+
+# Alternatively if the geometry.json is absent, you can
+# define geometry by these commands. Note, they will NOT
+# be effective if the geometry has been defined in the json file.
+# Sequence is IMPORTANT: world first, then layers in their intended order,
+# then the detector, and the whole thing MUST be before /run/initialize
+# Note: maxStep in world and layers, when set to -1, means DEFAULT
+# (i.e. means left to the Geant4 library to set).
+#
+#/css/geom/materials/elements/addDef name Z A
+#/css/geom/materials/elements/addDef C 6 13.5
+#
+#/css/geom/materials/addDef name density unit elemname:fraction [elemname:fraction] ....
+#/css/geom/materials/addDef DopedPlastic 1.05 g/cm3 C:0.86925 H:0.08075 XWZ:0.05
+#
+#/css/geom/addWorld posX posY posZ material xSize ySize zSize layersOffset maxStep
+#/css/geom/addWorld 0.0 0.0 0.0 G4_Galactic 1.0 1.0 2.0 10.0 20.0
+#/css/geom/addLayer name material thickness countAllEntries  trackPrimSurvivors reqResidualEnrgOnExit evalRadiations maxStep
+#/css/geom/addLayer AlLayer1 G4_Al 50.0 true false false false 20.0
+#/css/geom/addLayer PolyLayer G4_POLYETHYLENE 50.0 true false false false 20.0
+#/css/geom/addLayer WLayer G4_W 50.0 true false false false 20.0
+#/css/geom/addLayer PbLayer G4_Pb 50.0 true false false false 20.0
+#/css/geom/addLayer AlLayer2 G4_Al 50.0 true false false false 20.0
+#/css/geom/addLayer Detector G4_AIR 50.0 false true true true 20.0
+
+# Alternatively if the beam.json is absent, you can
+# define the beam composition by these commands. Note, they will NOT
+# be effective if the beam composition has been defined in the json file.
+# 
+# And also custom particles can be defined upfront if any (and these definitions
+# will apply if the custom particles json file is absent.
+# Note: the name must not collide with an official Geant4 particle name, or it will be neglected
+#
+#/css/beam/defParticle name   Z     A excitationEnergy
+#/css/beam/defParticle Carbon 6 16.0 0.0
+#/css/beam/defParticle Oxygen 8 16.0 0.0
+#/css/beam/defParticle Neon 10 20.0 0.0
+#/css/beam/defParticle Magnesium 12 24.0 0.0
+#/css/beam/defParticle Silicon 14 28.0 0.0
+#/css/beam/defParticle Iron 26 56.0 0.0
+#/css/beam/defParticle Nitrogen 7 14.0 0.0
+#/css/beam/defParticle Sodium 11 23.0 0.0
+#/css/beam/defParticle Calcium 20 40.0 0.0
+#/css/beam/defParticle Nickel 28 58.0 0.0
+#/css/beam/defParticle Aluminum 13 27.0 0.0
+#/css/beam/defParticle Phosphorus 15 31.0 0.0
+#/css/beam/defParticle Sulfur 16 32.0 0.0
+#/css/beam/defParticle Argon 18 40.0 0.0
+#/css/beam/defParticle Zinc 30 64.0 0.0
+#
+#/css/beam/addParticle particle energy flux pos(x, y, z) momdir(x, y, z)
+#/css/beam/addParticle proton      10.0 10000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle proton     100.0  5000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle proton    1000.0  2000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle proton   10000.0   100.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle proton  100000.0    10.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha       10.0  1000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha      100.0   600.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha     1000.0   300.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha    10000.0    50.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle alpha   100000.0     5.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-           1.0 15000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-          10.0  7000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-         100.0  3000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-        1000.0   500.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle e-       10000.0    50.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma        0.1  2000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma        1.0  1000.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma       10.0   300.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma      100.0    50.0 0.0 0.0 -1.0 0.0 0.0 1.0
+#/css/beam/addParticle gamma     1000.0     5.0 0.0 0.0 -1.0 0.0 0.0 1.0
+
+/run/initialize
+
+#/run/verbose 0
+#/event/verbose 0
+#/geometry/navigator/verbose 0
+
+# (increasing this eventually enables the tracking)
+/tracking/verbose 0
+
+#/material/nist/listMaterials
+#/run/particleDump (not supported)
+#/particle/list
+#/run/beamOn 100000
+/run/beamOn 10
+
+
+========== LOG - BEGIN =========
+Launching simulation (mode: batch, log level: 6)
+[250808-19:30:58:847][139980089318464][-1][INFO][DRIVER] Cosmic Shield Simulator v. 5.1.5-250808 (by: Matteo Picciau)
+[250808-19:30:58:847][139980089318464][-1][INFO][DRIVER] Using Geant4 v. geant4-11-03-patch-02
+
+**************************************************************
+ Geant4 version Name: geant4-11-03-patch-02 [MT]   (25-April-2025)
+  << in Multi-threaded mode >> 
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+[250808-19:30:58:881][139980089318464][-1][INFO][DRIVER] Using application configuration: /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj/config/appconfig.json
+[250808-19:30:58:881][139980089318464][-1][INFO][DRIVER] Using geometry configuration: /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj/config/geometry.json
+[250808-19:30:58:881][139980089318464][-1][INFO][DRIVER] Using materials configuration: /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj/config/custom-materials.json
+[250808-19:30:58:881][139980089318464][-1][INFO][DRIVER] Using particles configuration: /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj/config/custom-particles.json
+[250808-19:30:58:881][139980089318464][-1][INFO][DRIVER] Using beam configuration: /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj/config/beam.json
+[250808-19:30:58:881][139980089318464][-1][INFO][DRIVER] Using WR resolution configuration: /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj/config/wrresolver.json
+[250808-19:30:58:882][139980089318464][-1][INFO][WRRESLV] [setup] Nbr of WR rules loaded (from /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj/config/wrresolver.json): 17
+[250808-19:30:58:883][139980089318464][-1][INFO][DRIVER] Loading physics list: QGSP_BIC_AllHP
+[250808-19:30:58:883][139980089318464][-1][INFO][PHYSMGR] Physics list is being loaded STATICALLY (initialization verbosity: 0)
+[250808-19:30:58:884][139980089318464][-1][INFO][PHYSMGR] Physics list LOADED: 14QGSP_BIC_AllHP
+[250808-19:30:58:887][139980089318464][-1][INFO][DRIVER] RunManager initialized with physics list.
+[250808-19:30:58:887][139980089318464][-1][INFO][DRIVER] Creating datafiles directory: /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj/out/r250808193058
+[250808-19:30:58:887][139980089318464][-1][INFO][DRIVER] Chart Z-offset: 0.000000
+[250808-19:30:58:887][139980089318464][-1][INFO][DRIVER] Global KPIs: enabled
+[250808-19:30:58:887][139980089318464][-1][INFO][DRIVER] Global geometry summary: enabled
+[250808-19:30:58:887][139980089318464][-1][INFO][DRIVER] Global particles summary: enabled
+[250808-19:30:58:887][139980089318464][-1][INFO][DRIVER] Thread particles summary: disabled
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Registered graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  G4HepRepFile (HepRepFile)
+  RayTracer (RayTracer)
+  VRML2FILE (VRML2FILE)
+  gMocrenFile (gMocrenFile)
+  TOOLSSG_OFFSCREEN (TSG_OFFSCREEN, TSG_FILE)
+  OpenGLImmediateX (OGLIX, OGLI)
+  OpenGLStoredX (OGLSX, OGL, OGLS)
+  RayTracerX (RayTracerX)
+  TOOLSSG_X11_GLES (TSG_X11_GLES, TSGX11, TSG)
+  TOOLSSG_X11_ZB (TSG_X11_ZB, TSGX11ZB)
+You may choose a graphics system (driver) with a parameter of
+the command "/vis/open" or "/vis/sceneHandler/create",
+or you may omit the driver parameter and choose at run time:
+- by argument in the construction of G4VisExecutive;
+- by environment variable "G4VIS_DEFAULT_DRIVER";
+- by entry in "~/.g4session";
+- by build flags.
+- Note: This feature is not allowed in batch mode.
+For further information see "examples/basic/B1/exampleB1.cc"
+and "vis.mac".
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByAttribute
+  drawByCharge
+  drawByOriginVolume
+  drawByParticleID
+  drawByEncounteredVolume
+
+Registered models:
+  None
+
+Registered filter factories:
+  attributeFilter
+  chargeFilter
+  originVolumeFilter
+  particleFilter
+  encounteredVolumeFilter
+
+Registered filters:
+  None
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+"/vis/list" to see available colours.
+[250808-19:30:58:889][139980089318464][-1][INFO][DRIVER] *** This run will NOT launch any simulation as a request to dump the G4 materials database has been made by configuration, and in this case the program will exit RIGHT AFTER this has been done. This is expected behavior, as the G4 materials database dumping functionality inflates memory in a non-recoverable way. ***
+[250808-19:30:58:889][139980089318464][-1][INFO][G4MDATA] Dumping Geant4 materials database (base path: ../proj/g4_materials)
+[250808-19:30:58:889][139980089318464][-1][INFO][G4MDATA] Geant4 materials database DUMPED (../proj/g4_materials_list.txt, format: TXT)
+[250808-19:30:58:894][139980089318464][-1][INFO][G4MDATA] Geant4 materials database DUMPED (../proj/g4_materials_db.json, format: JSON)
+[250808-19:30:58:894][139980089318464][-1][INFO][DRIVER] EXIT (this is expected behavior, as the G4 materials database dumping functionality inflates memory in a non-recoverable way)

@@ -1,0 +1,28 @@
+{
+  "_comment1": "def. momentum directions applies if momentum_direction is not specified at the particle level, or if vector is too small",
+  "_comment2": "def. position applies if position is not specified at the particle level",
+  "def_momentum_direction": [0.0, 0.0, 1.0],
+  "def_position": [0.0, 0.0, -1.0],
+  "beam": [
+    {
+      "particle": "proton",
+      "energy": 1000.0,
+      "flux": 2000.0
+    },
+    {
+      "particle": "proton",
+      "energy": 10000.0,
+      "flux": 30.0
+    },
+    {
+      "particle": "proton",
+      "energy": 10000.0,
+      "flux": 30.0
+    },
+    {
+      "particle": "proton",
+      "energy": 10000.0,
+      "flux": 30.0
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "_notes1": "units supported: g/cm3, kg/m3, mg/cm3, g/mm3, g/m3",
+  "elements": [
+    { "name": "C", "Z": 6, "A": 12.01 },
+    { "name": "H", "Z": 1, "A": 1.008 },
+    { "name": "XWZ", "Z": 16, "A": 999.0 }
+  ],
+  "materials": [
+    {
+      "name": "DopedPlastic",
+      "density": 1.05,
+      "unit": "g/cm3",
+      "components": [
+        { "element": "C", "fraction": 0.86925 },
+        { "element": "H", "fraction": 0.08075 },
+        { "element": "XWZ", "fraction": 0.05 }
+      ]
+    }
+  ]
+}
+

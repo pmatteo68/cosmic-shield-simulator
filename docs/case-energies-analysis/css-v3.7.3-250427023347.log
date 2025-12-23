@@ -1,0 +1,334 @@
+======= Cosmic Shield Simulator v. 3.7.3 Run Technical Sheet ============
+
+Timestamp: 250427023347
+
+Geant4 install root: /home/ec2-user/sw/geant4/v11.3.1/install
+
+Geant4 environment: ref. /home/ec2-user/sw/geant4/v11.3.1/install/bin/geant4.sh
+
+G4PARTICLEHPDATA=/home/ec2-user/sw/geant4/v11.3.1/install/share/Geant4/data/G4TENDL1.4
+
+------ Application configuration:
+{
+  "physicsList": "QGSP_BIC_AllHP"
+}
+
+------ Geometry configuration:
+{
+  "_comment1": "The maxStep field in the world and in the layers is OPTIONAL, you need to omit it or to misspell it to get default behavior (i.e. varying step, driven by Physics selected)",
+  "world": {
+    "material": "G4_Galactic",
+    "xSize": 1.0,
+    "ySize": 1.0,
+    "zSize": 2.0,
+    "layersOffset": 10.0,
+    "max666666666Step": 200.0
+  },
+  "layers": [
+    {
+      "_comment_layers1": "Layer names MUST be all different",
+      "name": "AlLayer",
+      "material": "G4_Al",
+      "thickness": 10.0,
+      "maxS666666tep": 200.0
+    },
+    {
+      "name": "PolyLayer",
+      "material": "G4_POLYETHYLENE",
+      "thickness": 30.0,
+      "maxS6666tep": 200.0
+    },
+    {
+      "name": "WLayer",
+      "material": "G4_W",
+      "thickness": 20.0,
+      "maxS6666tep": 200.0
+    }
+  ],
+  "detector": {
+    "copyNbr": 999,
+    "material": "G4_AIR",
+    "thickness": 20.0
+  }
+}
+
+------ Beam configuration:
+{
+  "_comment1": "def. momentum directions applies if momentum_direction is not specified at the particle level, or if vector is too small",
+  "_comment2": "def. position applies if position is not specified at the particle level",
+  "def_momentum_direction": [0.0, 0.0, 1.0],
+  "def_position": [0.0, 0.0, -1.0],
+  "beam": [
+    {
+      "particle": "proton",
+      "energy": 1000.0,
+      "flux": 2000.0
+    },
+    {
+      "particle": "proton",
+      "energy": 10000.0,
+      "flux": 30.0
+    },
+    {
+      "particle": "proton",
+      "energy": 10000.0,
+      "flux": 30.0
+    },
+    {
+      "particle": "proton",
+      "energy": 10000.0,
+      "flux": 30.0
+    }
+  ]
+}
+
+------ Run macro:
+# Macro to generate the basic output
+
+/run/numberOfThreads 4
+/run/initialize
+
+#/run/verbose 0
+#/event/verbose 0
+#/geometry/navigator/verbose 0
+
+# (increasing this eventually enables the tracking)
+/tracking/verbose 0
+
+#/run/beamOn 100000
+/run/beamOn 10
+
+
+
+========== LOG - BEGIN =========
+[250427-02:33:47:637][140460909648896][-1][INFO][DRIVER] Cosmic Shield Simulator v. 3.7.3-250427 (by: Matteo Picciau)
+[250427-02:33:47:638][140460909648896][-1][INFO][DRIVER] Using Geant4 v. geant4-11-03-patch-01
+
+**************************************************************
+ Geant4 version Name: geant4-11-03-patch-01 [MT]   (21-March-2025)
+  << in Multi-threaded mode >> 
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+[250427-02:33:47:775][140460909648896][-1][INFO][DRIVER] Using application configuration directory: ../proj/config
+[250427-02:33:47:776][140460909648896][-1][INFO][DRIVER] Loading physics list: QGSP_BIC_AllHP
+[250427-02:33:47:776][140460909648896][-1][INFO][DRIVER] Physics list is being loaded STATICALLY (initialization verbosity: 0)
+[250427-02:33:47:785][140460909648896][-1][INFO][DRIVER] Physics list LOADED: 14QGSP_BIC_AllHP
+[250427-02:33:47:789][140460909648896][-1][INFO][DRIVER] RunManager initialized with physics list.
+[250427-02:33:47:789][140460909648896][-1][INFO][DRIVER] Creating datafiles directory: ../proj/out/r250427023347
+[250427-02:33:47:789][140460909648896][-1][INFO][DRIVER] Global summary: enabled
+[250427-02:33:47:789][140460909648896][-1][INFO][DRIVER] Thread summary: enabled
+[250427-02:33:47:789][140460909648896][-1][INFO][G4ENGINE] Count particle entries in detector: only once
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Registered graphics systems are:
+  ASCIITree (ATree)
+  DAWNFILE (DAWNFILE)
+  G4HepRepFile (HepRepFile)
+  RayTracer (RayTracer)
+  VRML2FILE (VRML2FILE)
+  gMocrenFile (gMocrenFile)
+  TOOLSSG_OFFSCREEN (TSG_OFFSCREEN, TSG_FILE, TSG)
+You may choose a graphics system (driver) with a parameter of
+the command "/vis/open" or "/vis/sceneHandler/create",
+or you may omit the driver parameter and choose at run time:
+- by argument in the construction of G4VisExecutive;
+- by environment variable "G4VIS_DEFAULT_DRIVER";
+- by entry in "~/.g4session";
+- by build flags.
+- Note: This feature is not allowed in batch mode.
+For further information see "examples/basic/B1/exampleB1.cc"
+and "vis.mac".
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByAttribute
+  drawByCharge
+  drawByOriginVolume
+  drawByParticleID
+  drawByEncounteredVolume
+
+Registered models:
+  None
+
+Registered filter factories:
+  attributeFilter
+  chargeFilter
+  originVolumeFilter
+  particleFilter
+  encounteredVolumeFilter
+
+Registered filters:
+  None
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+"/vis/list" to see available colours.
+
+=========================================================================
+--> G4TaskRunManager::CreateAndStartWorkers() --> Initializing workers...
+=========================================================================
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : Run10035
+      issued by : G4TaskRunManager::InitializeEventLoop()
+Event modulo is reduced to 2 (was 3) to distribute events to all threads.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : Run10035
+      issued by : G4TaskRunManager::InitializeEventLoop()
+Event modulo is reduced to 2 (was 3) to distribute events to all threads.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+========================================================================================
+--> G4TaskRunManager::CreateAndStartWorkers() --> Creating 5 tasks with 2 events/task...
+========================================================================================
+
+G4WT2 > ... open analysis file : ../proj/out/r250427023347/data.csv - done
+G4WT2 > ... create file : ../proj/out/r250427023347/data_nt_step_t2.csv - done
+G4WT1 > ... open analysis file : ../proj/out/r250427023347/data.csv - done
+G4WT1 > ... create file : ../proj/out/r250427023347/data_nt_step_t1.csv - done
+G4WT3 > ... open analysis file : ../proj/out/r250427023347/data.csv - done
+G4WT3 > ... create file : ../proj/out/r250427023347/data_nt_step_t3.csv - done
+G4WT0 > ... open analysis file : ../proj/out/r250427023347/data.csv - done
+G4WT0 > ... create file : ../proj/out/r250427023347/data_nt_step_t0.csv - done
+G4WT3 > ... write file : ../proj/out/r250427023347/data_nt_step_t3.csv - done
+G4WT3 > ... close file : ../proj/out/r250427023347/data_nt_step_t3.csv - done
+G4WT3 > 
+=== [G4Thread: G4WT003] Run ended. Summary by Layer and Particle (scope: worker thread) ===
+Layer (L001): AlLayer
+    G4WT003 | L001 | Particle: e- | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT003 | L001 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT003 | L001 | Particle: proton | In: 2 | Out: 2 | E_in: 20000 MeV | E_out: 19995.7 MeV
+Layer (L002): PolyLayer
+    G4WT003 | L002 | Particle: e- | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT003 | L002 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT003 | L002 | Particle: proton | In: 2 | Out: 2 | E_in: 19995.7 MeV | E_out: 19990.9 MeV
+Layer (L003): WLayer
+    G4WT003 | L003 | Particle: e- | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT003 | L003 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT003 | L003 | Particle: proton | In: 2 | Out: 2 | E_in: 19990.9 MeV | E_out: 19946.2 MeV
+Layer (LDET): Detector
+    G4WT003 | LDET | Particle: e- | In: 1 | Out: 0 | E_in: 0.00111905 MeV | E_out: 0 MeV
+    G4WT003 | LDET | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT003 | LDET | Particle: proton | In: 2 | Out: 2 | E_in: 19891 MeV | E_out: 19891 MeV
+======================================
+
+G4WT1 > ... write file : ../proj/out/r250427023347/data_nt_step_t1.csv - done
+G4WT1 > ... close file : ../proj/out/r250427023347/data_nt_step_t1.csv - done
+G4WT1 > 
+=== [G4Thread: G4WT001] Run ended. Summary by Layer and Particle (scope: worker thread) ===
+Layer (L001): AlLayer
+    G4WT001 | L001 | Particle: e- | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT001 | L001 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT001 | L001 | Particle: proton | In: 2 | Out: 2 | E_in: 11000 MeV | E_out: 10995.8 MeV
+Layer (L002): PolyLayer
+    G4WT001 | L002 | Particle: e- | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT001 | L002 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT001 | L002 | Particle: proton | In: 2 | Out: 2 | E_in: 10995.8 MeV | E_out: 10982.6 MeV
+Layer (L003): WLayer
+    G4WT001 | L003 | Particle: e- | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT001 | L003 | Particle: gamma | In: 0 | Out: 1 | E_in: 0 MeV | E_out: 8.44043 MeV
+    G4WT001 | L003 | Particle: proton | In: 2 | Out: 2 | E_in: 10982.6 MeV | E_out: 10899.4 MeV
+Layer (LDET): Detector
+    G4WT001 | LDET | Particle: e- | In: 2 | Out: 0 | E_in: 0.00320706 MeV | E_out: 0 MeV
+    G4WT001 | LDET | Particle: gamma | In: 1 | Out: 1 | E_in: 8.44043 MeV | E_out: 8.44043 MeV
+    G4WT001 | LDET | Particle: proton | In: 2 | Out: 2 | E_in: 10886.9 MeV | E_out: 10886.9 MeV
+======================================
+
+G4WT2 > ... write file : ../proj/out/r250427023347/data_nt_step_t2.csv - done
+G4WT2 > ... close file : ../proj/out/r250427023347/data_nt_step_t2.csv - done
+G4WT2 > 
+=== [G4Thread: G4WT002] Run ended. Summary by Layer and Particle (scope: worker thread) ===
+Layer (L001): AlLayer
+    G4WT002 | L001 | Particle: e- | In: 0 | Out: 1 | E_in: 0 MeV | E_out: 2.25972 MeV
+    G4WT002 | L001 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT002 | L001 | Particle: proton | In: 2 | Out: 2 | E_in: 20000 MeV | E_out: 19993.7 MeV
+Layer (L002): PolyLayer
+    G4WT002 | L002 | Particle: e- | In: 1 | Out: 1 | E_in: 2.25972 MeV | E_out: 1.45787 MeV
+    G4WT002 | L002 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT002 | L002 | Particle: proton | In: 2 | Out: 2 | E_in: 19993.7 MeV | E_out: 19983 MeV
+Layer (L003): WLayer
+    G4WT002 | L003 | Particle: e- | In: 1 | Out: 0 | E_in: 1.45787 MeV | E_out: 0 MeV
+    G4WT002 | L003 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT002 | L003 | Particle: proton | In: 2 | Out: 2 | E_in: 19983 MeV | E_out: 19887.7 MeV
+Layer (LDET): Detector
+    G4WT002 | LDET | Particle: e- | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT002 | LDET | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT002 | LDET | Particle: proton | In: 2 | Out: 2 | E_in: 19873.7 MeV | E_out: 19873.7 MeV
+======================================
+
+G4WT0 > ... write file : ../proj/out/r250427023347/data_nt_step_t0.csv - done
+G4WT0 > ... close file : ../proj/out/r250427023347/data_nt_step_t0.csv - done
+G4WT0 > 
+=== [G4Thread: G4WT000] Run ended. Summary by Layer and Particle (scope: worker thread) ===
+Layer (L001): AlLayer
+    G4WT000 | L001 | Particle: e- | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT000 | L001 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT000 | L001 | Particle: proton | In: 4 | Out: 4 | E_in: 22000 MeV | E_out: 21996 MeV
+Layer (L002): PolyLayer
+    G4WT000 | L002 | Particle: e- | In: 0 | Out: 1 | E_in: 0 MeV | E_out: 0.883773 MeV
+    G4WT000 | L002 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT000 | L002 | Particle: proton | In: 4 | Out: 4 | E_in: 21996 MeV | E_out: 21972.6 MeV
+Layer (L003): WLayer
+    G4WT000 | L003 | Particle: e- | In: 1 | Out: 0 | E_in: 0.883773 MeV | E_out: 0 MeV
+    G4WT000 | L003 | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT000 | L003 | Particle: proton | In: 4 | Out: 4 | E_in: 21972.6 MeV | E_out: 21937.6 MeV
+Layer (LDET): Detector
+    G4WT000 | LDET | Particle: e- | In: 2 | Out: 0 | E_in: 0.00373436 MeV | E_out: 0 MeV
+    G4WT000 | LDET | Particle: gamma | In: 0 | Out: 0 | E_in: 0 MeV | E_out: 0 MeV
+    G4WT000 | LDET | Particle: proton | In: 4 | Out: 4 | E_in: 21781.5 MeV | E_out: 21781.5 MeV
+======================================
+
+Graphics systems deleted.
+Visualization Manager deleting...
+
+=== [G4Thread: G4_MAIN] Run ended. Summary by Layer and Particle (scope: global) ===
+
+Layer (L001): AlLayer
+    G4_MAIN | L001 | Particle: e- | In: 0 | Out: 1 | E_in: 0 MeV | E_out: 2.25972 MeV
+    G4_MAIN | L001 | Particle: proton | In: 10 | Out: 10 | E_in: 73000 MeV | E_out: 72981.3 MeV
+
+Layer (L002): PolyLayer
+    G4_MAIN | L002 | Particle: e- | In: 1 | Out: 2 | E_in: 2.25972 MeV | E_out: 2.34164 MeV
+    G4_MAIN | L002 | Particle: proton | In: 10 | Out: 10 | E_in: 72981.3 MeV | E_out: 72929.2 MeV
+
+Layer (L003): WLayer
+    G4_MAIN | L003 | Particle: e- | In: 2 | Out: 0 | E_in: 2.34164 MeV | E_out: 0 MeV
+    G4_MAIN | L003 | Particle: gamma | In: 0 | Out: 1 | E_in: 0 MeV | E_out: 8.44043 MeV
+    G4_MAIN | L003 | Particle: proton | In: 10 | Out: 10 | E_in: 72929.2 MeV | E_out: 72670.9 MeV
+
+Layer (LDET): Detector
+    G4_MAIN | LDET | Particle: e- | In: 5 | Out: 0 | E_in: 0.00806048 MeV | E_out: 0 MeV
+    G4_MAIN | LDET | Particle: gamma | In: 1 | Out: 1 | E_in: 8.44043 MeV | E_out: 8.44043 MeV
+    G4_MAIN | LDET | Particle: proton | In: 10 | Out: 10 | E_in: 72433.1 MeV | E_out: 72433.1 MeV
+======================================
+
+[250427-02:34:31:056][140460909648896][-1][INFO][DRIVER] Simulator processing COMPLETE.
+[250427-02:34:31:056][140460909648896][-1][INFO][CSVMERGER] CSV Merging process begin (Threads: 4).
+[250427-02:34:31:056][140460909648896][-1][INFO][CSVMERGER] Input: ../proj/out/r250427023347/data*.csv.
+[250427-02:34:31:056][140460909648896][-1][INFO][CSVMERGER] Output: ../proj/out/r250427023347/merged_data.csv.
+[250427-02:34:31:058][140460909648896][-1][INFO][CSVMERGER] Files found: 4.
+[250427-02:34:31:061][140460909648896][-1][INFO][CSVMERGER] Processing 4 files in 4 threads...
+[250427-02:34:31:106][140460909648896][-1][INFO][CSVMERGER] CSV Merging process complete. Total rows written: 884.
+[250427-02:34:31:107][140460909648896][-1][INFO][DRIVER] Program END.

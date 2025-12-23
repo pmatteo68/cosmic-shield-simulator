@@ -1,0 +1,18 @@
+    } else {
+        Logger::info("PHYSMGR", "Physics list is being loaded dynamically (initialization verbosity: unsettable)");
+        G4PhysListFactory factory;
+
+        if (!factory.IsReferencePhysList(fPhysListName)) {
+            Logger::error("PHYSMGR", "Invalid physics list: " + fPhysListName);
+            return nullptr;
+        }
+
+        physicsList = factory.GetReferencePhysList(fPhysListName);
+    }
+
+    if (physicsList)
+        Logger::info("PHYSMGR", std::string("Physics list LOADED: ") + typeid(*physicsList).name());
+
+    return physicsList;
+}
+

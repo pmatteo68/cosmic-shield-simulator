@@ -1,0 +1,85 @@
+
+#if [ -z "$1" ]; then
+#    echo "Usage: $0 <log file name>"
+#    echo "   (example: $0 logs/css-v3.7.2-250425160942.log)"
+#    exit 1
+#fi
+
+#hl_if_diffold() {
+#    local a="$1"
+#    local b="$2"
+#    if [[ "$a" == "$b" ]]; then
+#        echo -e "\033[1;32m$b\033[0m"  # bold green
+#    else
+#        echo -e "\033[1;31m$b\033[0m"  # bold red
+#    fi
+#}
+
+LOG_DIR=./logs
+def_desc="newest log file in ${LOG_DIR}"
+def_log_file=${LOG_DIR}/$(ls -lart ${LOG_DIR} | grep -vE '\s\.\.?$' | tail -1 | awk '{ print $NF }')
+
+log_file="${def_log_file}"
+if [ $# -ge 1 ]; then
+  cand_log_file=$1
+  if [ -f "${cand_log_file}" ]; then
+     log_file="${cand_log_file}"
+  else
+     echo "The specified file (${cand_log_file}) does not exist. Default applies (i.e. ${def_desc})."
+  fi
+else
+     echo "No file was specified. Default applies (i.e. ${def_desc})."
+fi
+
+#log_file=$1
+echo "Analyzing summary data from: ${log_file} ..."
+s_tstamp=$(date +"%y%m%d%H%M%S")
+summ_raw_file=temp/summary_raw-${s_tstamp}.csv
+particle_tok="Particle\:"
+main_thr=G4_MAIN
+echo "Thread;Layer;Particle;In;Out;E_in;E_out" > ${summ_raw_file}
+cat ${log_file} | grep "G4WT" | grep "${particle_tok}" | sed -E 's/Particle: ([A-Za-z0-9]+)\[([0-9.]+X?)\]/Particle: \1_\2/g' | awk '{ print $1 ";" $3 ";" $6 ";" $9 ";" $12 ";" $15 ";" $19}' >> ${summ_raw_file}
+cat ${log_file} | grep "${main_thr}" | grep "${particle_tok}" | sed -E 's/Particle: ([A-Za-z0-9]+)\[([0-9.]+X?)\]/Particle: \1_\2/g' | awk '{ print $1 ";" $3 ";" $6 ";" $9 ";" $12 ";" $15 ";" $19}' >> ${summ_raw_file}
+echo "Raw data file created: ${summ_raw_file}"
+
+#Thread;Layer;Particle;In;Out;E_in;E_out
+#G4WT000;L001;e-;0;1;0;2.25972
+#G4WT000;L001;gamma;0;0;0;0
+
+#/run/numberOfThreads 4
+start_line=2
+num_threads=$(cat ${log_file} | grep "/run/numberOfThreads" | awk '{ print $2 }')
+echo "Summary analysis follows."
+echo
+echo "Found nbr. of threads: ${num_threads}"
+echo
+part_col_sz=10
+count_col_sz=8
+echo "   $(printf "%-*s" "${part_col_sz}" "Particle") $(printf "%*s" "${count_col_sz}" "wk_in") $(printf "%*s" "${count_col_sz}" "wk_out") $(printf "%*s" "${count_col_sz}" "glob_in") $(printf "%*s" "${count_col_sz}" "glob_out")"
+for cur_layer in $(tail -n+${start_line} ${summ_raw_file} | awk -F";" '{print $2}' | sort -u); do
+  #Layer (L003): WLayer
+  #l_name=$(cat ${log_file} | grep Layer | grep "${cur_layer}" | tail -1 | awk '{ print $3 }')
+  l_name=$(cat ${log_file} | grep "Layer (${cur_layer})\: "| tail -1 | awk '{ print $3 }')
+  if [ "x{l_name}" == "x" ]; then
+    echo "Layer: ${cur_layer}"
+  else
+    echo "Layer (${cur_layer}): ${l_name}"
+  fi
+  #echo "   $(printf "%-*s" "${part_col_sz}" "Particle") $(printf "%*s" "${count_col_sz}" "wk_in") $(printf "%*s" "${count_col_sz}" "wk_out") $(printf "%*s" "${count_col_sz}" "glob_in") $(printf "%*s" "${count_col_sz}" "glob_out")"
+  for cur_part in $(tail -n+${start_line} ${summ_raw_file} | awk -F";" -v vcurlayer=${cur_layer} '{ if ($2 == vcurlayer) print $3 }' | sort -u); do
+    #echo
+    #tail -n+${start_line} ${summ_raw_file} | grep -v "${main_thr}" | grep "G4WT" | awk -F";" -v vcurlayer=${cur_layer} -v vcurpart=${cur_part} '{ if (($2 == vcurlayer) && ($3 == vcurpart)) print $4 ";" $5 ";" $6 ";" $7 }' 
+    #echo
+    read -r tot_wk_in tot_wk_out tot_wk_ein tot_wk_eout <<< $(tail -n+${start_line} ${summ_raw_file} | grep -v "${main_thr}" | grep "G4WT" | awk -F";" -v vcurlayer=${cur_layer} -v vcurpart=${cur_part} '{ if (($2 == vcurlayer) && ($3 == vcurpart)) print $4 ";" $5 ";" $6 ";" $7 }' | awk -F";" 'BEGIN {tot_in=0; tot_out=0; tot_ein=0; tot_eout=0} {tot_in=tot_in+0+$1; tot_out=tot_out+0+$2; tot_ein=tot_ein+0+$3; tot_eout=tot_eout+0+$4} END {print tot_in " " tot_out " " tot_ein " " tot_eout}')
+    read -r tot_glob_in tot_glob_out tot_glob_ein tot_glob_eout <<< $(tail -n+${start_line} ${summ_raw_file} | grep -v "G4WT" | grep "${main_thr}" | awk -F";" -v vcurlayer=${cur_layer} -v vcurpart=${cur_part} '{ if (($2 == vcurlayer) && ($3 == vcurpart)) print $4 ";" $5 ";" $6 ";" $7 }' | awk -F";" 'BEGIN {tot_in=0; tot_out=0; tot_ein=0; tot_eout=0} {tot_in=tot_in+0+$1; tot_out=tot_out+0+$2; tot_ein=tot_ein+0+$3; tot_eout=tot_eout+0+$4} END {print tot_in " " tot_out " " tot_ein " " tot_eout}')
+    #hled_tot_glob_in=$(hl_if_diff ${tot_wk_in} ${tot_glob_in})
+    #hled_tot_glob_out=$(hl_if_diff ${tot_wk_out} ${tot_glob_out})
+    if [[ $tot_wk_in -ne $tot_glob_in || $tot_wk_out -ne $tot_glob_out || $tot_wk_ein -ne $tot_glob_ein || $tot_wk_eout -ne $tot_glob_eout ]]; then
+      mism_info=$(echo -e "\033[1;31m! mismatch !\033[0m")
+    else
+      mism_info=$(echo -e "\033[1;32m match: OK \033[0m")
+    fi
+    echo -e "   $(printf "%-*s" "${part_col_sz}" "${cur_part}") $(printf "%*s" "${count_col_sz}" "${tot_wk_in}") $(printf "%*s" "${count_col_sz}" "${tot_wk_out}") $(printf "%*s" "${count_col_sz}" "${tot_glob_in}") $(printf "%*s" "${count_col_sz}" "${tot_glob_out}") ${mism_info}"
+  done
+done
+

@@ -1,0 +1,3 @@
+    __TMPL_IF_PFIX_if (fPhysListName == "__TMPL_PHYS_STR_") {
+        Logger::info("PHYSMGR", staticMsg);
+        physicsList = new __TMPL_PHYS_CLASS_(fVerbosity);

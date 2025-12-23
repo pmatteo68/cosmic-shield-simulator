@@ -1,0 +1,39 @@
+{
+  "_comment1": "The maxStep field in the world and in the layers is OPTIONAL, you need to omit it or to misspell it to get default behavior (i.e. varying step, driven by Physics selected)",
+  "_comment2": "The world position is 0.0, 0.0, 0.0 by default if not specified. NOTE: although this is configurable software-wise, Geant4 DOES NOT SUPPORT positions other than 0-0-0 for the world object. The application exposes this parameter as configurable just in case things change in future. And the workaround (creating an innerworld) would introduce complexity, and we won't do it, at least for the moment.",
+  "world": {
+    "position": [0.0, 0.0, 0.0],
+    "material": "G4_Galactic",
+    "xSize": 1.0,
+    "ySize": 1.0,
+    "zSize": 2.0,
+    "layersOffset": 10.0,
+    "max666666666Step": 200.0
+  },
+  "layers": [
+    {
+      "_comment_layers1": "Layer names MUST be all different",
+      "name": "AlLayer",
+      "material": "G4_Al",
+      "thickness": 10.0,
+      "maxS666666tep": 200.0
+    },
+    {
+      "name": "PolyLayer",
+      "material": "G4_POLYETHYLENE",
+      "thickness": 30.0,
+      "maxS6666tep": 200.0
+    },
+    {
+      "name": "WLayer",
+      "material": "G4_W",
+      "thickness": 20.0,
+      "maxS6666tep": 200.0
+    }
+  ],
+  "detector": {
+    "copyNbr": 999,
+    "material": "G4_AIR",
+    "thickness": 20.0
+  }
+}

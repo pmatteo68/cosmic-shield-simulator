@@ -1,0 +1,6 @@
+// PhysicsManager.cc
+#include "PhysicsManager.hh"
+#include "G4PhysListFactory.hh"
+#include "Logger.hh" // Assuming you have a Logger class
+#include <typeinfo>
+

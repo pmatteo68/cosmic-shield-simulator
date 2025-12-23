@@ -1,0 +1,70 @@
+Cosmic Shield Simulator v. 5.1.5 build shell
+Re-creating build directory (../build) ...
+Done.
+json.hpp found (include/nlohmann/json.hpp)
+Moved in position (/home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/proj)
+Building (cmake) ...
+-- The C compiler identification is GNU 11.5.0
+-- The CXX compiler identification is GNU 11.5.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found EXPAT: /usr/lib64/libexpat.so (found suitable version "2.5.0", minimum required is "2.5.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found XercesC: /home/ec2-user/sw/xerces-c/v3.3.0/install/lib/libxerces-c.so (found suitable version "3.3.0", minimum required is "3.3.0") 
+-- Found X11: /usr/include   
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found OpenGL: /usr/lib64/libOpenGL.so   
+-- Found Geant4: /home/ec2-user/sw/geant4/v11.3.2/install/lib64/cmake/Geant4/Geant4Config.cmake (found version "11.3.2") 
+-- Configuring done (1.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/ec2-user/g4-wbench/projects/cosmic-shield-sim/v5.1.5-250808/build
+Done. Building (make) ...
+[  7%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/CosmicShieldSimulation.cc.o
+[  7%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/ActionInitialization.cc.o
+[ 11%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/AppConfig.cc.o
+[ 15%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/BeamConfigManager.cc.o
+[ 19%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/BeamConfigMessenger.cc.o
+[ 23%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/CmdLineParser.cc.o
+[ 26%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/CsvHelper.cc.o
+[ 30%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/CustomCSVBuilder.cc.o
+[ 34%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/CustomIonLoader.cc.o
+[ 38%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/CustomMaterialLoader.cc.o
+[ 42%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/DetectorConstruction.cc.o
+[ 46%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/DetectorMessenger.cc.o
+[ 50%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/G4MetaDataUtils.cc.o
+[ 53%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/Logger.cc.o
+[ 57%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/MaterialsManager.cc.o
+[ 61%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/ParticleDataManager.cc.o
+[ 65%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/PhysicsManager.cc.o
+[ 69%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/PrimaryGeneratorAction.cc.o
+[ 73%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/RunAction.cc.o
+[ 76%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/SWMeta.cc.o
+[ 80%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/StepDataWriter.cc.o
+[ 84%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/SteppingAction.cc.o
+[ 88%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/SurvPrimCollector.cc.o
+[ 92%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/Utils.cc.o
+[ 96%] Building CXX object CMakeFiles/CosmicShieldSimulation.dir/src/WRResolver.cc.o
+[100%] Linking CXX executable CosmicShieldSimulation
+[100%] Built target CosmicShieldSimulation
+Build completed.

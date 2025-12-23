@@ -1,0 +1,39 @@
+No file was specified. Default applies (i.e. newest log file in ./logs).
+Analyzing summary data from: ./logs/css-v3.7.3-250427023347.log ...
+Raw data file created: temp/summary_raw-250427023810.csv
+Summary analysis follows.
+
+Found nbr. of threads: 4
+
+   Particle      wk_in   wk_out  glob_in glob_out
+Layer (L001): AlLayer
+./analyzeSummary-withEnergy.sh: line 77: [[: 2.25972: syntax error: invalid arithmetic operator (error token is ".25972")
+   e-                0        1        0        1 [1;32m match: OK [0m
+   gamma             0        0        0        0 [1;32m match: OK [0m
+./analyzeSummary-withEnergy.sh: line 77: [[: 72981.2: syntax error: invalid arithmetic operator (error token is ".2")
+   proton           10       10       10       10 [1;32m match: OK [0m
+Layer (L002): PolyLayer
+./analyzeSummary-withEnergy.sh: line 77: [[: 2.25972: syntax error: invalid arithmetic operator (error token is ".25972")
+./analyzeSummary-withEnergy.sh: line 77: [[: 2.34164: syntax error: invalid arithmetic operator (error token is ".34164")
+   e-                1        2        1        2 [1;32m match: OK [0m
+   gamma             0        0        0        0 [1;32m match: OK [0m
+./analyzeSummary-withEnergy.sh: line 77: [[: 72981.2: syntax error: invalid arithmetic operator (error token is ".2")
+./analyzeSummary-withEnergy.sh: line 77: [[: 72929.1: syntax error: invalid arithmetic operator (error token is ".1")
+   proton           10       10       10       10 [1;32m match: OK [0m
+Layer (L003): WLayer
+./analyzeSummary-withEnergy.sh: line 77: [[: 2.34164: syntax error: invalid arithmetic operator (error token is ".34164")
+   e-                2        0        2        0 [1;32m match: OK [0m
+./analyzeSummary-withEnergy.sh: line 77: [[: 8.44043: syntax error: invalid arithmetic operator (error token is ".44043")
+   gamma             0        1        0        1 [1;32m match: OK [0m
+./analyzeSummary-withEnergy.sh: line 77: [[: 72929.1: syntax error: invalid arithmetic operator (error token is ".1")
+./analyzeSummary-withEnergy.sh: line 77: [[: 72670.9: syntax error: invalid arithmetic operator (error token is ".9")
+   proton           10       10       10       10 [1;32m match: OK [0m
+Layer (LDET): Detector
+./analyzeSummary-withEnergy.sh: line 77: [[: 0.00806047: syntax error: invalid arithmetic operator (error token is ".00806047")
+   e-                5        0        5        0 [1;32m match: OK [0m
+./analyzeSummary-withEnergy.sh: line 77: [[: 8.44043: syntax error: invalid arithmetic operator (error token is ".44043")
+./analyzeSummary-withEnergy.sh: line 77: [[: 8.44043: syntax error: invalid arithmetic operator (error token is ".44043")
+   gamma             1        1        1        1 [1;32m match: OK [0m
+./analyzeSummary-withEnergy.sh: line 77: [[: 72433.1: syntax error: invalid arithmetic operator (error token is ".1")
+./analyzeSummary-withEnergy.sh: line 77: [[: 72433.1: syntax error: invalid arithmetic operator (error token is ".1")
+   proton           10       10       10       10 [1;32m match: OK [0m

@@ -1,0 +1,24 @@
+{
+  "_comment1": "The rules are applied in order. If one applies, the others are not evaluated. If none applies, the default applies. With debug log, rule resolution is seen. Rules are numbered from 0 to N-1",
+  "_comment2": "The thresholds are supposed as enLow <= en < enHigh (when present)",
+  "defaultWr": 5.0,
+  "wrRules": [
+    { "partName": "neutron", "enHigh": 0.001, "wr": 2.5 },
+    { "partName": "neutron", "enLow": 0.001, "enHigh": 0.01, "wr": 10 },
+    { "partName": "neutron", "enLow": 0.01, "enHigh": 0.1, "wr": 20 },
+    { "partName": "neutron", "enLow": 0.1, "enHigh": 0.5, "wr": 10 },
+    { "partName": "neutron", "enLow": 0.5, "enHigh": 1.0, "wr": 5 },
+    { "partName": "neutron", "enLow": 1.0, "enHigh": 2.0, "wr": 2.5 },
+    { "partName": "neutron", "enLow": 2.0, "enHigh": 20.0, "wr": 2.5 },
+    { "partName": "neutron", "enLow": 20.0, "wr": 1 },
+    { "partName": "proton", "wr": 2 },
+    { "partName": "alpha", "wr": 20 },
+    { "partName": "gamma", "wr": 1 },
+    { "partName": "e-", "wr": 1 },
+    { "partName": "e+", "wr": 1 },
+    { "partName": "deuteron", "wr": 2 },
+    { "partName": "triton", "wr": 2 },
+    { "partName": "He3", "wr": 20 },
+    { "partName": "GenericIon", "wr": 20 }
+  ]
+}

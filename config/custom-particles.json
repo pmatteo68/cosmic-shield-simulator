@@ -1,0 +1,20 @@
+{
+  "particleDefs": [
+    { "name": "Carbon",     "Z": 6,  "A": 16.0,  "excitationEnergy": 0.0 },
+    { "name": "Oxygen",     "Z": 8,  "A": 16.0,  "excitationEnergy": 0.0 },
+    { "name": "Neon",       "Z": 10, "A": 20.0,  "excitationEnergy": 0.0 },
+    { "name": "Magnesium",  "Z": 12, "A": 24.0,  "excitationEnergy": 0.0 },
+    { "name": "Silicon",    "Z": 14, "A": 28.0,  "excitationEnergy": 0.0 },
+    { "name": "Iron",       "Z": 26, "A": 56.0,  "excitationEnergy": 0.0 },
+    { "name": "Nitrogen",   "Z": 7,  "A": 14.0,  "excitationEnergy": 0.0 },
+    { "name": "Sodium",     "Z": 11, "A": 23.0,  "excitationEnergy": 0.0 },
+    { "name": "Calcium",    "Z": 20, "A": 40.0,  "excitationEnergy": 0.0 },
+    { "name": "Nickel",     "Z": 28, "A": 58.0,  "excitationEnergy": 0.0 },
+    { "name": "Aluminum",   "Z": 13, "A": 27.0,  "excitationEnergy": 0.0 },
+    { "name": "Phosphorus", "Z": 15, "A": 31.0,  "excitationEnergy": 0.0 },
+    { "name": "Sulfur",     "Z": 16, "A": 32.0,  "excitationEnergy": 0.0 },
+    { "name": "Argon",      "Z": 18, "A": 40.0,  "excitationEnergy": 0.0 },
+    { "name": "Zinc",       "Z": 30, "A": 64.0,  "excitationEnergy": 0.0 },
+    { "name": "Uranium",    "Z": 92, "A": 238.0, "excitationEnergy": 0.0 }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "_comment1": "The maxStep field in the world and in the layers is OPTIONAL, you need to omit it or to misspell it to get default behavior (i.e. varying step, driven by Physics selected)",
+  "_comment2": "The world position is 0.0, 0.0, 0.0 by default if not specified. NOTE: although this is configurable software-wise, Geant4 DOES NOT SUPPORT positions other than 0-0-0 for the world object. The application exposes this parameter as configurable just in case things change in future. And the workaround (creating an innerworld) would introduce complexity, and we won't do it, at least for the moment.",
+  "_comment3": "When not specified, evalRadiations is false",
+  "world": {
+    "position": [0.0, 0.0, 0.0],
+    "material": "G4_Galactic",
+    "xSize": 1.0,
+    "ySize": 1.0,
+    "zSize": 2.0,
+    "layersOffset": 10.0,
+    "maxStep": 20.0
+  },
+  "layers": [
+    {
+      "_comment_layers1": "Layer names MUST be all different, containing NO SPACES",
+      "name": "AlLayer1",
+      "material": "G4_Al",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "_comment_layers1": "Layer names MUST be all different, containing NO SPACES",
+      "name": "Plast1",
+      "material": "DopedPlastic",
+      "thickness": 20.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "_comment_layers1": "Layer names MUST be all different, containing NO SPACES",
+      "name": "PolyLayer",
+      "material": "G4_POLYETHYLENE",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "true",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "name": "WLayer",
+      "material": "G4_W",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "name": "PbLayer",
+      "material": "G4_Pb",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "_comment_layers1": "Layer names MUST be all different, containing NO SPACES",
+      "name": "AlLayer2",
+      "material": "G4_Al",
+      "thickness": 50.0,
+      "countAllEntries": "true",
+      "trackPrimSurvivors": "false",
+      "reqResidualEnrgOnExit": "false",
+      "maxStep": 20.0
+    },
+    {
+      "name": "Detector",
+      "material": "G4_AIR",
+      "thickness": 50.0,
+      "countAllEntries": "false",
+      "trackPrimSurvivors": "true",
+      "reqResidualEnrgOnExit": "true",
+      "evalRadiations": "true",
+      "maxStep": 20.0
+    }
+  ]
+}
